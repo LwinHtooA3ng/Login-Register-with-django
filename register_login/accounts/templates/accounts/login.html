@@ -1,0 +1,42 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="username">Username</label><br>
+            <input type="text" name="username" id="username"><br>
+
+            <label for="password">password</label><br>
+            <input type="password" name="password" id="password"><br> <br>
+
+            {% for message in messages %}
+
+            {{message}}
+
+            {% endfor %} <br> <br>
+
+            <input type="submit" value="login">
+        </form>
+
+        <h2><a href="{% provider_login_url 'google' %}">Sign in with GOOGLE.</a></h2>
+
+        <h3>If you have not account, create <a href="{% url 'register' %}">Signup here.</a></h3>
+    </div>
+    
+</body>
+</html>

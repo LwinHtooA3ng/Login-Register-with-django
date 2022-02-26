@@ -1,0 +1,65 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        .container{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form action="" method="POST">{% csrf_token %}
+
+            <label for="username">Username</label><br>
+            {{ form.username }} <br>
+
+            <label for="email">Email</label><br>
+            {{ form.email }} <br>
+
+            <label for="password1">Password</label><br>
+            {{ form.password1 }} <br>
+
+            <label for="password2">Confirm Password</label><br>
+            {{ form.password2 }} <br> <br>
+
+            {% if form.errors %}
+
+                {% for field in form %}
+
+                    {% for error in field.errors %}
+                        {{ error | escape }}
+                    {% endfor %}
+
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    {{ error | escape }}
+                {% endfor %} <br><br>
+
+            {% endif %}
+
+
+            <p>**Password need at least 1 number, 1 Special, 1 Upper Case and 8 character.</p>
+
+            <button type="submit">Register</button>
+            
+        </form>
+
+        <h2><a href="{% provider_login_url 'google' %}">Sign up with GOOGLE.</a></h2>
+
+
+        <p>If you have already account sign in <a href="{% url 'login' %}">Signin here.</a></p>
+
+
+    </div>
+    
+</body>
+</html>
